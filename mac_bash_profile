@@ -1,0 +1,6 @@
+# terminal shortcuts
+alias ll='ls -la'
+
+# Docker alias
+alias terraform='docker run -it hashicorp/terraform:light'
+alias ansible='docker run -it ansible/ansible'
