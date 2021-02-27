@@ -1,3 +1,4 @@
+#Reference article for provisioning windows host for ansible: https://docs.ansible.com/ansible/2.10/user_guide/windows_setup.html
 $url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
 $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
 
