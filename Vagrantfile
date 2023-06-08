@@ -7,6 +7,8 @@ Vagrant.configure("2") do |config|
         vb.customize ["setextradata", :id, "GUI\/LastGuestSizeHint", "1920,1080"]
     end    
     config.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = "./provisioning/playbook.yaml"
+        ansible.galaxy_role_file = "./provisioning/requirements.yaml"
+        ansible.galaxy_command  = "ansible-galaxy install --role-file=%{role_file}"
+        ansible.playbook        = "./provisioning/playbook.yaml"
     end
 end

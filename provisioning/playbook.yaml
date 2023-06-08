@@ -4,6 +4,23 @@
   become: yes
 
   tasks:
+  - name: Ensure zsh installed
+    apt:
+      pkg:
+        - zsh
+
+  - name: Ensure Oh My ZSH installed
+    include_role:
+      name: gantsign.oh-my-zsh
+    vars:
+      oh_my_zsh_theme: awesomepanda
+      oh_my_zsh_install: true
+      oh_my_zsh_update_mode: auto
+      oh_my_zsh_plugins:
+        - git
+      users:
+        - username: vagrant
+
   - name: Ensure classic apps installed
     community.general.snap:
       name:
@@ -12,4 +29,45 @@
         - code
         - gitkraken
       classic: true
-      
+
+# Install Docker      
+  - name: Install aptitude
+    apt: 
+      pkg:
+        - aptitude
+
+  - name: Install required system packages
+    apt:
+      pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
+      state: latest
+      update_cache: true
+
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+  - name: Update apt and install docker-ce
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
+
+  - name: Install Docker Module for Python
+    pip:
+      name: docker
+  # handlers:
+  #   - name: Update default terminal
+  #     command: chsh -s /usr/bin/zsh
