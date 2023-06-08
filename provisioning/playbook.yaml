@@ -1,0 +1,15 @@
+---
+- name: Setup development environment
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Ensure classic apps installed
+    community.general.snap:
+      name:
+        - goland
+        - intellij-idea-ultimate
+        - code
+        - gitkraken
+      classic: true
+      

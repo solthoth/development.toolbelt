@@ -1,6 +1,7 @@
 Vagrant.configure("2") do |config|
-    config.vm.box = "gusztavvargadr/visual-studio"
-    config.vm.box_download_insecure =true
-    config.vm.provision "shell", path: "support/ansible/win_init.ps1"
-    config.vm.provision "shell", path: "support/perforce/p4v_install.ps1"
+    config.vm.box = "gusztavvargadr/ubuntu-desktop"
+    config.vm.provider "virtualbox"
+    config.vm.provision "ansible_local" do |ansible|
+        ansible.playbook = "./provisioning/playbook.yaml"
+    end
 end
