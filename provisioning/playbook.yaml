@@ -28,6 +28,7 @@
         - intellij-idea-ultimate
         - code
         - gitkraken
+        - gradle
       classic: true
 
 # Install Docker      
